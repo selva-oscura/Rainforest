@@ -1,0 +1,19 @@
+/* Put your custom CSS here */
+.ui-header .ui-title {
+	margin:.6em .4em .8em .4em;
+}
+
+.ui-footer .ui-header {
+	margin:.6em .4em .8em .4em;
+}
+
+
+h5 {
+display: block;
+font-size: 0.83em;
+-webkit-margin-before: .4em;
+-webkit-margin-after: .4em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
+}
