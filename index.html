@@ -167,6 +167,10 @@
                 <div data-theme="b" data-role="header">
                     <h3>
                     </h3>
+                    <a data-role="button" href="#home" data-icon="home" data-iconpos="left"
+                    class="ui-btn-left" data-transition="slide">
+                        Home
+                    </a>
                     <a data-role="button" data-transition="slide" data-theme="e" href="#sort_by"
                     class="ui-btn-right">
                         Sort By
@@ -174,6 +178,7 @@
                     <ul data-role="listview" data-divider-theme="e" data-inset="true">
                         <li data-role="list-divider" role="heading">
                             People
+                            <input name="or Search by Name " id="searchinput2" placeholder="Search by Name" value="" data-mini="true" type="search">
                         </li>
                         <li data-theme="c">
                             <a href="#mom" data-transition="slide">
@@ -221,14 +226,14 @@
                             </a>
                         </li>
                     </ul>
-                    <a data-role="button" href="#home" data-icon="home" data-iconpos="left"
+<!--                     <a data-role="button" href="#home" data-icon="home" data-iconpos="left"
                     class="ui-btn-left" data-transition="slide">
                         Home
-                    </a>
+                    </a> -->
                 </div>
                 <div data-role="content">
                     <a data-role="button" data-theme="e" href="#add_person">
-                        Add or Delete Person
+                        Add or Remove a Person
                     </a>
                     <!---Haven't decided yet if I prefer a button at the top or might go back to this one at the bottom
                     <a data-role="button" data-theme="e" href="#sort_by">
@@ -341,6 +346,11 @@
                         </div>
                    </div>
                </div>
+                <div data-role="content">
+                    <a data-role="button" href="http://www.amazon.com" data-theme="b" href="#add_person">
+                        Browse for More Gift Ideas
+                    </a>
+                </div>
             </div>
             <div data-theme="b" data-role="footer" data-position="fixed">
                 <h3>
