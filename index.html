@@ -80,6 +80,11 @@
                     class="ui-btn-left" data-transition="slide">
                         Home
                     </a>
+                    <a data-role="button" data-transition="slide" data-theme="e" href="#edit_events"
+                    class="ui-btn-right">
+                        Edit Events
+                    </a>
+
                 </div>
                 <ul data-role="listview" data-divider-theme="e" data-inset="true">
                     <li data-role="list-divider" role="heading">
@@ -145,8 +150,8 @@
                 </ul>
             </div>
             <div data-role="content">
-                <a data-role="button" data-theme="e" href="#add_event">
-                    Add Event
+                <a data-role="button" data-theme="e" href="#add_event" data-transition="slide">
+                    Add or Remove Event
                 </a>
             </div>
             <div data-theme="b" data-role="footer" data-position="fixed">
@@ -156,7 +161,56 @@
         </div><!--end of div date-->
 
 
-
+        <!-- edit_events -->
+        <div data-role="page" id="edit_events">
+            <div data-theme="b" data-role="header">
+                <h2>
+                    Rainforest Gifting
+                </h2>
+                <div data-theme="b" data-role="header">
+                    <h3>
+                    </h3>
+                    <a data-role="button" data-theme="b" href="#home" data-icon="home" data-iconpos="left"
+                    class="ui-btn-left" data-transition="slide">
+                        Home
+                    </a>
+                    <a data-role="button" data-theme="e" href="#date" data-icon="back" data-iconpos="left"
+                    class="ui-btn-right" data-transition="slide">
+                        Events
+                    </a>
+                </div>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="e" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Edit Events
+                    </li>
+                    <li data-theme="c">
+                        <a href="#add_event" data-transition="slide">
+                            Add an Event
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#edit_event" data-transition="slide">
+                            Edit an Event
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#remove_event" data-transition="slide">
+                            Remove an Event
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#remove_event_person" data-transition="slide">
+                            Remove a Person from an Event
+                        </a>
+                    </li>                </ul>
+            </div>
+            <div data-theme="b" data-role="footer" data-position="fixed">
+                <h3>
+                </h3>
+            </div>
+        </div>
 
                 <!-- Name -->
         <div data-role="page" id="name">
@@ -171,9 +225,9 @@
                     class="ui-btn-left" data-transition="slide">
                         Home
                     </a>
-                    <a data-role="button" data-transition="slide" data-theme="e" href="#sort_by"
+                    <a data-role="button" data-transition="slide" data-theme="e" href="#edit_people"
                     class="ui-btn-right">
-                        Sort By
+                        Edit People
                     </a>
                     <ul data-role="listview" data-divider-theme="e" data-inset="true">
                         <li data-role="list-divider" role="heading">
@@ -232,7 +286,7 @@
                     </a> -->
                 </div>
                 <div data-role="content">
-                    <a data-role="button" data-theme="e" href="#add_person">
+                    <a data-role="button" data-theme="e" href="#edit_people" data-transition="slide">
                         Add or Remove a Person
                     </a>
                     <!---Haven't decided yet if I prefer a button at the top or might go back to this one at the bottom
@@ -247,6 +301,73 @@
             </div>
         </div><!--end of div name-->
 
+        <!-- edit_people -->
+        <div data-role="page" id="edit_people">
+            <div data-theme="b" data-role="header">
+                <h2>
+                    Rainforest Gifting
+                </h2>
+                <div data-theme="b" data-role="header">
+                    <h3>
+                    </h3>
+                    <a data-role="button" data-theme="b" href="#home" data-icon="home" data-iconpos="left"
+                    class="ui-btn-left" data-transition="slide">
+                        Home
+                    </a>
+                    <a data-role="button" data-theme="e" href="#name" data-icon="back" data-iconpos="left"
+                    class="ui-btn-right" data-transition="slide">
+                        People
+                    </a>
+                </div>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="e" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Edit People
+                    </li>
+                    <li data-theme="c">
+                        <a href="#add_person" data-transition="slide">
+                            Add a Person
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#edit_person" data-transition="slide">
+                            Edit a Person
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#remove_person" data-transition="slide">
+                            Remove a Person
+                        </a>
+                    </li>
+                </ul>
+                <ul data-role="listview" data-divider-theme="e" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Change Sort Order
+                    </li>
+                    <li data-theme="c">
+                        <a href="#alpha_order" data-transition="slide">
+                            Alphabetical Order
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#custom_order" data-transition="slide">
+                            Custom Sort Order
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#group_order" data-transition="slide">
+                            Sort by Groups
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div data-theme="b" data-role="footer" data-position="fixed">
+                <h3>
+                </h3>
+            </div>
+        </div>
+
         <!-- mom -->
         <div data-role="page" id="mom">
             <div data-theme="b" data-role="header">
@@ -258,7 +379,7 @@
                         Mom
                     </h3>
                     <a data-role="button" href="#home" data-icon="home" data-iconpos="left"
-                    class="ui-btn-left">
+                    class="ui-btn-left" data-transition="slide">
                         Home
                     </a>
                 </div>
@@ -347,7 +468,7 @@
                    </div>
                </div>
                 <div data-role="content">
-                    <a data-role="button" href="http://www.amazon.com" data-theme="b" href="#add_person">
+                    <a data-role="button" href="http://www.amazon.com" data-theme="b" href="#add_person" data-transition="slide">
                         Browse for More Gift Ideas
                     </a>
                 </div>
