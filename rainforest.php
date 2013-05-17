@@ -1,10 +1,13 @@
 <?php 
-    session_start();
-    if(!(isset($_SESSION['logged_in']))) 
+   session_start();
+    if(!isset($_SESSION['logged_in'])) 
     {
+        // var_dump($_SESSION);
+        // die();
     header('location:index.php');
     exit;
     }
+    require_once('connection.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,6 +65,7 @@
                 </div>
             </div>    
             <div data-role='content'>    
+                <h3>Welcome <?php echo $_SESSION['first_name'] ?></h3>
                 <ul data-role='listview' data-divider-theme='e' data-inset='true'>
                     <li data-role='list-divider' role='heading'>
                         Shop by
@@ -105,6 +109,57 @@
 
                 </div>
                 <ul data-role='listview' data-divider-theme='e' data-inset='true'>
+<?php
+    // var_dump($_SESSION);
+
+    $query="SELECT events.id, events.date, events.name
+            FROM events 
+            LEFT JOIN people_events ON people_events.event_id=events.id
+            LEFT JOIN people ON people.id=people_events.people_id
+            WHERE people.user_id = '{$_SESSION['user_id']}'
+            ORDER BY events.date ASC";
+    // echo $query;
+    // die();
+    $events=fetch_all($query);
+    $last_event="";
+    $last_date="";
+    foreach ($events as $event) 
+    {
+
+        if (!(($event['name']===$last_event) && ($event['date']===$last_date)))
+        {
+?>
+               <li data-role='list-divider' role='heading'>
+
+<?php
+                echo $event['date'] . " - " . $event['name'];
+?>
+                </li>
+<?php 
+            $last_event=$event['name'];
+            $last_date=$event['date'];
+            $query="SELECT people.nickname, people.id 
+                    FROM people
+                    LEFT JOIN people_events ON people_events.people_id = people.id
+                    WHERE people_events.event_id = '{$event['id']}'
+                    ORDER BY people.id ASC";
+            $people=fetch_all($query);
+            foreach ($people as $person)
+            {
+?>
+                <li data-theme='c'>
+
+<?php
+                    echo "<a href='#people_id" . $person['id'] . "' data-transition='slide'>" . $person['nickname'] . "</a>"
+?>
+                </li>
+<?php 
+            }
+        }
+    }
+?>                    
+
+<!-- 
                     <li data-role='list-divider' role='heading'>
                         May 12, 2013 - Mother's Day
                     </li>
@@ -164,8 +219,8 @@
                         <a href='#kourosh' data-transition='slide'>
                             Kourosh
                         </a>
-                    </li>
-                </ul>
+                    </li>-->
+                 </ul>
             </div>
             <div data-role='content'>
                 <a data-role='button' data-theme='e' href='#add_event' data-transition='slide'>
@@ -251,53 +306,21 @@
                     <ul data-role='listview' data-divider-theme='e' data-inset='true'>
                         <li data-role='list-divider' role='heading'>
                             People
-                            <input name='name_search' id='searchinput2' placeholder='Search by Name' value='' data-mini='true' type='search'>
+                            <input name='name_search' id='searchinput' placeholder='Search by Name' value='' data-mini='true' type='search'>
                         </li>
-                        <li data-theme='c'>
-                            <a href='#mom' data-transition='slide'>
-                                Mom
+<?php 
+    $query="SELECT people.id, people.nickname FROM people WHERE people.user_id='{$_SESSION['user_id']}'";
+    $people=fetch_all($query);
+    foreach ($people as $person) {
+
+                        echo 
+                        "<li data-theme='c'>
+                            <a href='#people_id" . $person['id'] . "' data-transition='slide'>"
+                                . $person['nickname'] . "
                             </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#dad' data-transition='slide'>
-                                Dad
-                            </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#anu' data-transition='slide'>
-                                Anu
-                            </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#lorenzo' data-transition='slide'>
-                                Lorenzo
-                            </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#joelle' data-transition='slide'>
-                                Joëlle
-                            </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#andre' data-transition='slide'>
-                                André
-                            </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#betsy' data-transition='slide'>
-                                Betsy
-                            </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#robert' data-transition='slide'>
-                                Robert
-                            </a>
-                        </li>
-                        <li data-theme='c'>
-                            <a href='#kourosh' data-transition='slide'>
-                                Kourosh
-                            </a>
-                        </li>
+                        </li>";
+    }
+?>
                     </ul>
 <!--                     <a data-role='button' href='#home' data-icon='home' data-iconpos='left'
                     class='ui-btn-left' data-transition='slide'>
@@ -387,7 +410,7 @@
             </div>
         </div>
 
-                <!-- remove_person -->
+        <!-- remove_person -->
         <div data-role='page' id='remove_person'>
             <div data-theme='b' data-role='header'>
                 <h3>
@@ -406,50 +429,22 @@
                     </a>
                 </div>
             </div>
-<!-- <ul data-role='listview' data-divider-theme='e' data-inset='true'>
-<li data-role='list-divider' role='heading'> -->
              <div class='yellow' data-role='controlgroup' data-direction='horizontal' data-divider-theme='e' data-inset='true'>
-                <form id='search_user' action='rainforest_process.php' method='post' data-role='list-divider' role='heading'>
+                <form id='search_user' action='process.php' method='post' data-role='list-divider' role='heading'>
                     <input type='button' data-role='button' data-corners='false' value='Remove People' data-theme='e'>
                     <input name='name_search' id='searchinput2' placeholder='Search by Name' value='' data-mini='false' type='search' data-theme='e'>
 
                 </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='mom'>
-                    <input type='submit' data-role='button' data-corners='false' value='Mom' data-icon='delete' data-iconpos='right' data-theme='c'>
+<?php 
+    foreach ($people as $person) {
+        echo "<form class='remove_people' action='process.php' method='post'>
+                    <input type='hidden' name='remove_people'>
+                    <input type='hidden' name='person_id' value='" . $person['id'] . "'>
+                    <input type='submit' data-role='button' data-corners='false' value='" . $person['nickname'] . "' data-icon='delete' data-iconpos='right' data-theme='c'>
                 </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='dad'>
-                    <input type='submit' data-role='button' data-corners='false' value='Dad' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='anu'>
-                    <input type='submit' data-role='button' data-corners='false' value='Anu' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='lorenzo'>
-                    <input type='submit' data-role='button' data-corners='false' value='Lorenzo' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='joelle'>
-                    <input type='submit' data-role='button' data-corners='false' value='Joëlle' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='andre'>
-                    <input type='submit' data-role='button' data-corners='false' value='André' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='betsy'>
-                    <input type='submit' data-role='button' data-corners='false' value='Betsy' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='robert'>
-                    <input type='submit' data-role='button' data-corners='false' value='Robert' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
-                <form id='remove_user' action='rainforest_process.php' method='post'>
-                    <input type='hidden' name='people_id' value='kourosh'>
-                    <input type='submit' data-role='button' data-corners='false' value='Kourosh' data-icon='delete' data-iconpos='right' data-theme='c'>
-                </form>
+                ";
+    }
+?>                
             </div>
             <div data-theme='b' data-role='footer' data-position='fixed'>
                 <h3>
@@ -458,107 +453,71 @@
         </div><!--end of div remove_person-->
 
 
-        <!-- mom -->
-        <div data-role='page' id='mom'>
+        <!-- gift ideas / wishlist pages -->
+<?php 
+foreach ($people as $person) 
+{
+        $query="SELECT ASIN, title, author, price_amazon, img_url, wishlist FROM products WHERE people_id='{$person['id']}'";
+        $products=fetch_all($query);
+        echo "<!--beginning of div " . $person['nickname'] . "-->
+        <div data-role='page' id='people_id" . $person['id'] . "'>
             <div data-theme='b' data-role='header'>
                 <h3>
                     Rainforest Gifting
                 </h3>
                 <div data-theme='b' data-role='header'>
-                    <h3>
-                        Mom
-                    </h3>
+                    <h3>" . $person['nickname'] . "</h3>
                     <a data-role='button' href='#home' data-icon='home' data-iconpos='left'
                     class='ui-btn-left' data-transition='slide'>
                         Home
+                    </a>
+                    <a data-role='button' data-theme='e' href='#name' data-icon='back' data-iconpos='left'
+                    class='ui-btn-right' data-transition='slide'>
+                        People
                     </a>
                 </div>
             </div>
             <div data-role='content'>
                 <div data-role='collapsible-set' data-theme='e' data-content-theme='c'>
-                    <div data-role='collapsible' data-collapsed='false'>
-                        <h4>
-                            Stay Sharp Sudoku: 200 Challenging Puzzles
-                        </h4>
+                ";
+    if(count($products)<1)
+    {
+                    echo "<div data-role='collapsible' data-collapsed='false'>
+                        <h4>No Gift Ideas or Wish List Items Selected Yet</h4>
                         <div class='ui-grid-a'>
-                            <div class='ui-block-a'>
-                                <img width='95' height='135' alt='Product Image' border='0' src='http://ecx.images-amazon.com/images/I/51ZdLJ9pPAL._SL500_SL135_.jpg' />
-                            </div>
-                            <div class='ui-block-b'>
-                                <h5>Stay Sharp Sudoku: 200 Challenging Puzzles</h5>
-                                <h5>by Will Shortz (Paperback)</h5>
-                                <h5>$7.99</h5>
-                                <a data-role='button' href='http://www.amazon.com' class='ui-btn-left' data-transition='slide'>Buy</a>
-                            </div>
+                            <h4>No Gift Ideas or Wish List Items Saved Yet</h4>
                         </div>
                     </div>
-                    <div data-role='collapsible'>
-                        <h4>
-                            How to Roast a Lamb: New Greek Classic Cooking
-                        </h4>
-                        <div class='ui-grid-a'>
-                            <div class='ui-block-a'>
-                                <img width='104' height='135' alt='Product Image' border='0' src='http://ecx.images-amazon.com/images/I/51J7kauxzJL._SL500_PIsitb-sticker-arrow-big,TopRight,35,-73_OU01_SL135_.jpg'>
-                            </div>
-                            <div class='ui-block-b'>
-                                <h5>How to Roast a Lamb: New Greek Classic Cooking</h5>
-                                <h5>by Michael Psilakis</h5>
-                                <h5>$23.33</h5>
-                                <a data-role='button' href='http://www.amazon.com' class='ui-btn-left' data-transition='slide'>Buy</a>
-                            </div>
+                    ";
+    }
+    else
+    {
+        foreach ($products as $product)
+        {
+
+                echo "<div data-role='collapsible' data-collapsed='false'>
+                    <h4>" . $product['title'] . "</h4>
+                    <div class='ui-grid-a'>
+                        <div class='ui-block-a'>
+                            <a href='http://www.amazon.com/dp/" . $product['ASIN'] . "'>
+                                <img width='95' height='135' alt='Product Image' border='0' src='" . $product['img_url'] . "' />
+                            </a>
+                        </div>
+                        <div class='ui-block-b'>
+                            <a href='http://www.amazon.com/dp/" . $product['ASIN'] . "'>
+                                <h5>" . $product['title'] . "</h5>
+                            </a>
+                            <h5>by " . $product['author'] . "</h5>
+                            <h5>" . $product['price_amazon'] . "</h5>
+                            <a data-role='button' href='http://www.amazon.com/dp/" . $product['ASIN'] . "' class='ui-btn-left' data-transition='slide'>Buy</a>
                         </div>
                     </div>
-                    <div data-role='collapsible'>
-                        <h4>
-                            Zojirushi NS-TGC10 Micom 5-1/2-Cup Rice Cooker and Warmer, Stainless Steel 
-                        </h4>
-                        <div class='ui-grid-a'>
-                            <div class='ui-block-a'>
-                                <img width='120' height='135' alt='Product Image' border='0' src='http://ecx.images-amazon.com/images/I/41reyI2PDAL._SL500_SL135_.jpg' >
-                            </div>
-                            <div class='ui-block-b'>
-                                <h5>Zojirushi NS-TGC10 Micom 5-1/2-Cup Rice Cooker and Warmer, Stainless Steel</h5>
-                                <h5>by Zojirushi</h5>
-                                <h5>$147.99</h5>
-                                <a data-role='button' href='http://www.amazon.com' class='ui-btn-left' data-transition='slide'>Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-role='collapsible'>
-                        <h4>
-                            G2 Violin, 4/4 size (Full size)
-                        </h4>
-                        <div class='ui-grid-a'>
-                            <div class='ui-block-a'>
-                                <img width='120' height='135' alt='Product Image' border='0' src='http://ecx.images-amazon.com/images/I/41UeKygre%2BL._SL500_SL135_.jpg' >
-                            </div>
-                            <div class='ui-block-b'>
-                                <h5>G2 Violin, 4/4 size (Full size)</h5>
-                                <h5>by Ricard Bunnel (sold by Kennedy Violins)</h5>
-                                <h5>$249.99</h5>
-                                <a data-role='button' href='http://www.amazon.com' class='ui-btn-left' data-transition='slide'>Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-role='collapsible'>
-                        <h4>
-                            Blindspot: A Novel
-                        </h4>
-                        <div class='ui-grid-a'>
-                            <div class='ui-block-a'>
-                                <img width='87' height='135' alt='Product Image' border='0' src='http://ecx.images-amazon.com/images/I/51fRPLDztLL._SL500_PIsitb-sticker-arrow-big,TopRight,35,-73_OU01_SL135_.jpg' />
-                            </div>
-                            <div class='ui-block-b'>
-                                <h5>Blindspot: A Novel</h5>
-                                <h5>by Jill LePore</h5>
-                                <h5>$12.12</h5>
-                                <a data-role='button' href='http://www.amazon.com' class='ui-btn-left' data-transition='slide'>Buy</a>
-                            </div>
-                        </div>
-                   </div>
-               </div>
-                <div data-role='content'>
-                    <a data-role='button' href='http://www.amazon.com' data-theme='b' href='#add_person' data-transition='slide'>
+                </div>
+                ";
+    }
+    }
+                echo "<div data-role='content'>
+                    <a data-role='button' href='http://www.amazon.com' data-theme='b' data-transition='slide'>
                         Browse for More Gift Ideas
                     </a>
                 </div>
@@ -567,6 +526,11 @@
                 <h3>
                 </h3>
             </div>
-        </div><!--end of div Mom-->
+        </div>
+    </div>
+    <!--end of div " . $person['nickname'] . "-->
+";
+}        
+?>
     </body>
 </html>
