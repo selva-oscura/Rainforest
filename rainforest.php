@@ -99,11 +99,11 @@
                     <h3>
                     </h3>
                     <a data-role='button' href='#home' data-icon='home' data-iconpos='left'
-                    class='ui-btn-left' data-transition='slide'>
+                    class='ui-btn-left' data-direction='reverse' data-rel='back' data-transition='slide'>
                         Home
                     </a>
                     <a data-role='button' data-transition='slide' data-theme='e' href='#edit_events'
-                    class='ui-btn-right'>
+                    class='ui-btn-right' data-icon="gear" data-iconpos="left">
                         Edit Events
                     </a>
 
@@ -159,73 +159,10 @@
     }
 ?>                    
 
-<!-- 
-                    <li data-role='list-divider' role='heading'>
-                        May 12, 2013 - Mother's Day
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#mom' data-transition='slide'>
-                            Mom
-                        </a>
-                    </li>
-                    <li data-role='list-divider' role='heading'>
-                        June 9, 2013 - Graduation
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#lorenzo' data-transition='slide'>
-                            Lorenzo
-                        </a>
-                    </li>
-                    <li data-role='list-divider' role='heading'>
-                        June 16, 2013 - Wedding
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#robert' data-transition='slide'>
-                            Robert
-                        </a>
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#joelle' data-transition='slide'>
-                            Joëlle
-                        </a>
-                    </li>
-                    <li data-role='list-divider' role='heading'>
-                        December 25, 2013
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#mom' data-transition='slide'>
-                            Mom
-                        </a>
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#dad' data-transition='slide'>
-                            Dad
-                        </a>
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#betsy' data-transition='slide'>
-                            Betsy
-                        </a>
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#andre' data-transition='slide'>
-                            André
-                        </a>
-                    </li>
-                    <li data-role='list-divider' role='heading'>
-                        March 21, 2014 - Nowrouz
-                    </li>
-                    <li data-theme='c'>
-                        <a href='#kourosh' data-transition='slide'>
-                            Kourosh
-                        </a>
-                    </li>-->
                  </ul>
             </div>
-            <div data-role='content'>
-                <a data-role='button' data-theme='e' href='#add_event' data-transition='slide'>
-                    Add or Remove Event
-                </a>
+            <div data-role='content' data-theme='b'>
+                <h3></h3>
             </div>
             <div data-theme='b' data-role='footer' data-position='fixed'>
                 <h3>
@@ -244,11 +181,11 @@
                     <h3>
                     </h3>
                     <a data-role='button' data-theme='b' href='#home' data-icon='home' data-iconpos='left'
-                    class='ui-btn-left' data-transition='slide'>
+                    class='ui-btn-left' data-direction='reverse' data-transition='slide'>
                         Home
                     </a>
                     <a data-role='button' data-theme='e' href='#date' data-icon='back' data-iconpos='left'
-                    class='ui-btn-right' data-transition='slide'>
+                    class='ui-btn-right' data-direction='reverse' data-rel='back' data-transition='slide'>
                         Events
                     </a>
                 </div>
@@ -295,12 +232,12 @@
                 <div data-theme='b' data-role='header'>
                     <h3>
                     </h3>
-                    <a data-role='button' href='#home' data-icon='home' data-iconpos='left'
-                    class='ui-btn-left' data-transition='slide'>
+                    <a data-role='button' href='#home' data-icon='home' data-iconpos='left'  
+                    class='ui-btn-left'  data-direction="reverse" data-transition='slide'>
                         Home
                     </a>
                     <a data-role='button' data-transition='slide' data-theme='e' href='#edit_people'
-                    class='ui-btn-right'>
+                    class='ui-btn-right' data-icon="gear" data-iconpos="left">
                         Edit People
                     </a>
                     <ul data-role='listview' data-divider-theme='e' data-inset='true'>
@@ -327,15 +264,15 @@
                         Home
                     </a> -->
                 </div>
-                <div data-role='content'>
+ <!--                <div data-role='content'>
                     <a data-role='button' data-theme='e' href='#edit_people' data-transition='slide'>
                         Add or Remove a Person
                     </a>
-                    <!---Haven't decided yet if I prefer a button at the top or might go back to this one at the bottom
+  -->                   <!---Haven't decided yet if I prefer a button at the top or might go back to this one at the bottom
                     <a data-role='button' data-theme='e' href='#sort_by'>
                         Change Sort Order
                     </a>-->
-                </div>
+ <!--                </div> -->
                 <div data-theme='b' data-role='footer' data-position='fixed'>
                     <h3>
                     </h3>
@@ -353,10 +290,10 @@
                     <h3>
                     </h3>
                     <a data-role='button' data-theme='b' href='#home' data-icon='home' data-iconpos='left'
-                    class='ui-btn-left' data-transition='slide'>
+                    class='ui-btn-left' data-direction='reverse' data-transition='slide'>
                         Home
                     </a>
-                    <a data-role='button' data-theme='e' href='#name' data-icon='back' data-iconpos='left'
+                    <a data-role='button' data-theme='e' href='#name' data-direction='reverse' data-rel='back' data-icon='back' data-iconpos='left'
                     class='ui-btn-right' data-transition='slide'>
                         People
                     </a>
@@ -420,10 +357,10 @@
                     <h3>
                     </h3>
                     <a data-role='button' href='#home' data-icon='home' data-iconpos='left'
-                    class='ui-btn-left' data-transition='slide'>
+                    class='ui-btn-left' data-direction='reverse' data-transition='slide'>
                         Home
                     </a>
-                    <a data-role='button' data-theme='e' href='#name' data-icon='back' data-iconpos='left'
+                    <a data-role='button' data-theme='e' href='#name' data-direction="reverse" data-icon='back' data-iconpos='left'
                     class='ui-btn-right' data-transition='slide'>
                         People
                     </a>
@@ -457,7 +394,7 @@
 <?php 
 foreach ($people as $person) 
 {
-        $query="SELECT ASIN, title, author, price_amazon, img_url, wishlist FROM products WHERE people_id='{$person['id']}'";
+        $query="SELECT ASIN, title, author, price_amazon, price_other_vendors_new, price_other_vendors_used, img_url, wishlist FROM products WHERE people_id='{$person['id']}'";
         $products=fetch_all($query);
         echo "<!--beginning of div " . $person['nickname'] . "-->
         <div data-role='page' id='people_id" . $person['id'] . "'>
@@ -468,12 +405,12 @@ foreach ($people as $person)
                 <div data-theme='b' data-role='header'>
                     <h3>" . $person['nickname'] . "</h3>
                     <a data-role='button' href='#home' data-icon='home' data-iconpos='left'
-                    class='ui-btn-left' data-transition='slide'>
+                    class='ui-btn-left' data-direction='reverse' data-rel='back' data-transition='slide'>
                         Home
                     </a>
-                    <a data-role='button' data-theme='e' href='#name' data-icon='back' data-iconpos='left'
+                    <a data-role='button' data-theme='e' data-direction='reverse' data-rel='back' data-icon='back' data-icon='back' data-iconpos='left'
                     class='ui-btn-right' data-transition='slide'>
-                        People
+                        Back
                     </a>
                 </div>
             </div>
@@ -495,7 +432,7 @@ foreach ($people as $person)
         foreach ($products as $product)
         {
 
-                echo "<div data-role='collapsible' data-collapsed='false'>
+                echo "<div data-role='collapsible' data-collapsed='true'>
                     <h4>" . $product['title'] . "</h4>
                     <div class='ui-grid-a'>
                         <div class='ui-block-a'>
@@ -508,7 +445,9 @@ foreach ($people as $person)
                                 <h5>" . $product['title'] . "</h5>
                             </a>
                             <h5>by " . $product['author'] . "</h5>
-                            <h5>" . $product['price_amazon'] . "</h5>
+                            <h5>Amazon Price: " . $product['price_amazon'] . "</h5>
+                            <h5>Other vendors Price (New): " . $product['price_other_vendors_new'] . "</h5>
+                            <h5>Other vendors Price (Used): " . $product['price_other_vendors_used'] . "</h5>
                             <a data-role='button' href='http://www.amazon.com/dp/" . $product['ASIN'] . "' class='ui-btn-left' data-transition='slide'>Buy</a>
                         </div>
                     </div>
