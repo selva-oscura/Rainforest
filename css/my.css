@@ -1,0 +1,52 @@
+/* Put your custom CSS here */
+.ui-header .ui-title {
+	margin:.6em .4em .8em .4em;
+}
+
+.ui-footer .ui-header {
+	margin:.6em .4em .8em .4em;
+}
+
+label.error {
+    color: red;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.4;
+    margin-top: 0.5em;
+    width: 100%;
+    float: none;
+}
+
+@media screen and (orientation: portrait){
+    label.error { 
+    	margin-left: 0; 
+    	display: block; 
+    }
+}
+
+@media screen and (orientation: landscape){
+    label.error { 
+    	display: inline-block; 
+    	margin-left: 22%; 
+    }
+}
+
+em{ 
+	color: red; 
+	font-weight: bold; 
+	padding-right: .25em; }
+
+
+.yellow{
+	background-color: #FFE155;
+}
+
+h5 {
+display: block;
+font-size: 0.83em;
+-webkit-margin-before: .4em;
+-webkit-margin-after: .4em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
+}
